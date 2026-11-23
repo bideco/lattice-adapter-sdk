@@ -1,0 +1,33 @@
+# Sample Lattice game manifest for a Fabric (Minecraft Java) adapter.
+schema_version = 1
+game_id = "example_fabric_game"
+display_name = "Example Fabric Game"
+adapter_type = "fabric_mod"
+input_contract = "lattice-v1"
+launch_strategy = "external"
+
+process_names = ["javaw.exe", "java.exe"]
+supported_versions = ["1.21.x"]
+
+required_files = [
+  "mods/lattice-example.jar",
+]
+
+capabilities = [
+  "keyboard",
+  "mouse",
+  "scroll",
+  "middle_click",
+  "settings_sync",
+  "profiles",
+  "multi_instance_switching",
+]
+
+profile_roots = [
+  "%APPDATA%/.minecraft",
+]
+
+[setup]
+summary = "Install Fabric, then place the Lattice adapter jar in your instance's mods folder. Run the game once before setup."
+requires_admin = false
+anti_cheat_risk = "none"

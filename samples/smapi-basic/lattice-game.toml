@@ -1,0 +1,31 @@
+# Sample Lattice game manifest for a SMAPI (Stardew Valley) adapter.
+schema_version = 1
+game_id = "stardew_valley"
+display_name = "Stardew Valley"
+adapter_type = "smapi_mod"
+input_contract = "lattice-v1"
+launch_strategy = "steam"
+
+process_names = ["Stardew Valley.exe", "StardewValley.exe"]
+supported_versions = ["1.6.x"]
+
+required_files = [
+  "Mods/LatticeStardew/LatticeStardew.dll",
+  "Mods/LatticeStardew/manifest.json",
+]
+
+capabilities = [
+  "keyboard",
+  "mouse",
+  "scroll",
+  "profiles",
+]
+
+profile_roots = [
+  "%APPDATA%/StardewValley",
+]
+
+[setup]
+summary = "Install SMAPI, then place the Lattice Stardew adapter in your Mods folder. Run the game once before setup."
+requires_admin = false
+anti_cheat_risk = "none"

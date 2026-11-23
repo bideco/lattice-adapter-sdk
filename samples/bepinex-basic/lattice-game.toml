@@ -1,0 +1,31 @@
+# Sample Lattice game manifest for a BepInEx (Unity) adapter.
+# Copy this into your package folder as lattice-game.toml and edit.
+schema_version = 1
+game_id = "example_unity_game"
+display_name = "Example Unity Game"
+adapter_type = "bepinex_plugin"
+input_contract = "lattice-v1"
+launch_strategy = "steam"
+
+process_names = ["ExampleGame.exe"]
+supported_versions = ["1.0.x"]
+
+required_files = [
+  "BepInEx/plugins/Lattice.ExampleGame.dll",
+]
+
+capabilities = [
+  "keyboard",
+  "mouse",
+  "virtual_cursor",
+  "scroll",
+]
+
+profile_roots = [
+  "%USERPROFILE%/AppData/LocalLow/ExampleStudio/ExampleGame",
+]
+
+[setup]
+summary = "Install BepInEx, then place the Lattice adapter DLL in BepInEx/plugins. Run the game once before setup."
+requires_admin = false
+anti_cheat_risk = "none"

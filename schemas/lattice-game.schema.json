@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lattice.dev/schemas/lattice-game.schema.json",
+  "title": "Lattice game manifest",
+  "description": "Declarative manifest describing a Lattice-supported game. Declarative only: no scripts, shell commands, registry, or driver operations.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "game_id", "display_name", "adapter_type"],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "game_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$",
+      "description": "Stable snake_case identifier, e.g. minecraft_java."
+    },
+    "display_name": { "type": "string", "minLength": 1 },
+    "adapter_type": {
+      "type": "string",
+      "enum": [
+        "fabric_mod",
+        "forge_mod",
+        "neoforge_mod",
+        "bepinex_plugin",
+        "melonloader_plugin",
+        "smapi_mod",
+        "ue4ss_mod",
+        "mono_script_mod",
+        "browser_extension",
+        "generic_window"
+      ]
+    },
+    "input_contract": { "type": "string", "examples": ["lattice-v1"] },
+    "launch_strategy": {
+      "type": "string",
+      "enum": ["external", "managed", "steam", "epic", "custom_launcher"]
+    },
+    "process_names": { "type": "array", "items": { "type": "string" } },
+    "supported_versions": { "type": "array", "items": { "type": "string" } },
+    "required_files": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Path relative to the game/instance folder. No absolute paths, no drive letters, no env vars, no '..'."
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "keyboard",
+          "mouse",
+          "virtual_cursor",
+          "scroll",
+          "middle_click",
+          "settings_sync",
+          "live_settings_apply",
+          "resourcepacks",
+          "mod_configs",
+          "hud",
+          "profiles",
+          "window_layout",
+          "multi_instance_switching"
+        ]
+      }
+    },
+    "profile_roots": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Must begin with an allowed env-root (%APPDATA%, %LOCALAPPDATA%, %PROGRAMDATA%, %PROGRAMFILES%, %PROGRAMFILES(X86)%, %USERPROFILE%) and include a game-specific subfolder."
+      }
+    },
+    "setup": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "summary": { "type": "string" },
+        "requires_admin": { "type": "boolean" },
+        "anti_cheat_risk": {
+          "type": "string",
+          "enum": ["none", "low", "medium", "high", "unsupported"]
+        }
+      }
+    }
+  }
+}
